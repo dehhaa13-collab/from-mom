@@ -1,6 +1,6 @@
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 body { 
     font-family: 'Inter', sans-serif; 
     background: #050505; 
@@ -82,6 +82,9 @@ body::after {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100; 
     display: flex; align-items: center; justify-content: space-between; 
     padding: 1.5rem 3rem; 
+    padding-top: max(1.5rem, env(safe-area-inset-top));
+    padding-left: max(3rem, env(safe-area-inset-left));
+    padding-right: max(3rem, env(safe-area-inset-right));
     backdrop-filter: blur(24px); 
     -webkit-backdrop-filter: blur(24px);
     background: rgba(5, 5, 5, 0.6); 
@@ -97,7 +100,7 @@ body::after {
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent; 
 }
-.nav-dots { display: flex; gap: 0.8rem; }
+.nav-dots { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; max-width: 60%; }
 .nav-dot { 
     width: 8px; height: 8px; 
     border-radius: 50%; 
@@ -114,7 +117,7 @@ body::after {
 }
 
 /* ===== SECTIONS ===== */
-.section { min-height: 100vh; display: flex; align-items: center; padding: 8rem 2rem; position: relative; z-index: 1; }
+.section { min-height: 100vh; display: flex; align-items: center; padding: 8rem 2rem; position: relative; z-index: 1; overflow-x: hidden; }
 .section-dark { background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(15,15,15,0.8) 50%, rgba(10,10,10,0) 100%); }
 .container { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 
@@ -441,9 +444,9 @@ body::after {
 
 /* --- SMALL TABLET / LARGE PHONE (600–767) --- */
 @media (max-width: 767px) {
-    .nav { padding: 0.8rem 1rem; }
+    .nav { padding: 0.8rem 1rem; padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
     .nav-logo { font-size: 1.2rem; letter-spacing: 0.15em; }
-    .nav-dots { gap: 0.5rem; }
+    .nav-dots { gap: 0.4rem; max-width: 55%; }
     .nav-dot { width: 6px; height: 6px; }
 
     .section { padding: 5rem 1.2rem; min-height: auto; }
@@ -454,7 +457,7 @@ body::after {
     .hero-tag { font-size: 0.7rem; letter-spacing: 0.3em; padding: 0.4rem 1rem; margin-bottom: 1.5rem; }
     .hero-title { font-size: clamp(2.8rem, 14vw, 4.5rem); }
     .hero-title span { font-size: 0.3em; letter-spacing: 0.25em; }
-    .hero-sub { font-size: 1rem; margin-bottom: 3rem; }
+    .hero-sub { font-size: 1rem; margin-bottom: 3rem; padding: 0 0.5rem; }
     .hero-sub br { display: none; }
 
     .mission-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -480,10 +483,10 @@ body::after {
     .canvas-cell { grid-column: auto !important; grid-row: auto !important; padding: 1.5rem; }
     .canvas-cell h4 { font-size: 0.95rem; }
 
-    .compare-table { border-radius: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .compare-header, .compare-row { grid-template-columns: 1.2fr 1fr 1fr; min-width: 340px; }
-    .compare-header .compare-col { padding: 0.8rem 0.6rem; font-size: 0.8rem; }
-    .compare-row .compare-col { padding: 0.7rem 0.6rem; font-size: 0.78rem; }
+    .compare-table { border-radius: 16px; overflow: hidden; }
+    .compare-header, .compare-row { grid-template-columns: 1.2fr 1fr 1fr; min-width: 0; }
+    .compare-header .compare-col { padding: 0.8rem 0.5rem; font-size: 0.72rem; white-space: normal; word-break: break-word; }
+    .compare-row .compare-col { padding: 0.7rem 0.5rem; font-size: 0.72rem; white-space: normal; word-break: break-word; }
 
     .swot-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .swot-card { padding: 1.5rem; }
@@ -493,9 +496,11 @@ body::after {
     .franchise-cards { grid-template-columns: 1fr; gap: 1.5rem; max-width: 400px; margin: 0 auto; }
     .fran-card { padding: 2.5rem 2rem; }
     .fran-price { font-size: 2.5rem; }
+    .fran-popular { transform: none; }
+    .fran-popular:hover { transform: none; }
 
     .strategy-items { grid-template-columns: 1fr; gap: 1rem; }
-    .strat-icon { width: 55px; height: 55px; font-size: 1.6rem; }
+    .strat-icon { width: 50px; height: 50px; font-size: 1.4rem; min-width: 50px; }
     .strategy-item { padding: 1.5rem; gap: 1rem; }
     .strategy-item h4 { font-size: 1.1rem; }
     .strategy-item p { font-size: 0.88rem; }
@@ -503,6 +508,9 @@ body::after {
     .geo-tag { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
     .cta-sub br { display: none; }
     .cta-btn { padding: 1rem 2.5rem; font-size: 0.95rem; }
+
+    /* Safe area padding for bottom on notch phones */
+    .section-cta { padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom))); }
 }
 
 /* --- PHONE (< 600px) --- */
@@ -512,7 +520,8 @@ body::after {
     .section-title { font-size: clamp(1.6rem, 7vw, 2.2rem); margin-bottom: 1.8rem; }
 
     .hero-title { font-size: clamp(2.5rem, 16vw, 4rem); }
-    .hero-sub { font-size: 0.9rem; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-title span { font-size: 0.28em; letter-spacing: 0.2em; }
+    .hero-sub { font-size: 0.9rem; line-height: 1.7; margin-bottom: 2.5rem; padding: 0 0.3rem; }
 
     .mission-grid { grid-template-columns: 1fr; gap: 1rem; }
     .mission-card { padding: 1.5rem; }
@@ -532,8 +541,9 @@ body::after {
         grid-template-columns: 1fr; 
         padding: 1rem; 
         border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+        min-width: 0;
     }
-    .compare-row .compare-col { padding: 0.4rem 0; border-bottom: none !important; }
+    .compare-row .compare-col { padding: 0.4rem 0; border-bottom: none !important; font-size: 0.88rem; }
     .compare-row .compare-col:first-child { 
         font-weight: 700; color: #fff; font-size: 0.95rem; 
         padding-top: 0; padding-bottom: 0.5rem;
@@ -542,9 +552,15 @@ body::after {
     }
     .compare-them::before { content: 'Глобальні: '; color: rgba(255,255,255,0.3); font-size: 0.75rem; }
     .compare-us::before { content: 'BLESS: '; font-size: 0.75rem; }
+    .compare-us { background: rgba(201, 169, 110, 0.08); border-radius: 8px; padding: 0.5rem 0.6rem !important; }
 
     .swot-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+    .swot-card h4 { font-size: 1rem; flex-wrap: wrap; }
+
     .franchise-cards { max-width: 100%; }
+    .fran-popular::after { font-size: 0.7rem; padding: 0.4rem 1.2rem; }
+
+    .strat-icon { width: 46px; height: 46px; font-size: 1.3rem; min-width: 46px; }
 
     .geo-row { gap: 0.8rem; }
     .geo-tag { padding: 0.5rem 1rem; font-size: 0.8rem; }
@@ -556,10 +572,21 @@ body::after {
 @media (max-width: 359px) {
     html { font-size: 14px; }
     .nav { padding: 0.6rem 0.8rem; }
-    .nav-logo { font-size: 1rem; }
+    .nav-logo { font-size: 1rem; letter-spacing: 0.1em; }
+    .nav-dots { gap: 0.3rem; }
+    .nav-dot { width: 5px; height: 5px; }
     .section { padding: 3.5rem 0.8rem; }
     .hero-tag { font-size: 0.6rem; letter-spacing: 0.2em; }
     .hero-title { font-size: clamp(2rem, 18vw, 3rem); }
+    .hero-title span { font-size: 0.25em; letter-spacing: 0.15em; }
+    .hero-sub { font-size: 0.82rem; }
+    .fran-price { font-size: 2rem; }
+    .fran-card { padding: 2rem 1.2rem; }
+    .canvas-cell { padding: 1.2rem; }
+    .canvas-cell h4 { font-size: 0.88rem; }
+    .canvas-cell ul { font-size: 0.82rem; }
+    .value-num { font-size: clamp(2.5rem, 18vw, 3.5rem); }
+    .cta-title { font-size: clamp(1.6rem, 8vw, 2.5rem); }
 }
 
 /* --- LANDSCAPE PHONE FIX --- */
