@@ -120,6 +120,7 @@ body::after {
 /* ===== SECTIONS ===== */
 .section { min-height: 100vh; display: flex; align-items: center; padding: 8rem 2rem; position: relative; z-index: 1; overflow-x: hidden; }
 .section-dark { background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(15,15,15,0.8) 50%, rgba(10,10,10,0) 100%); }
+.pt-reduced { padding-top: 4rem; min-height: 80vh; }
 .container { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 
 .section-num { 
@@ -265,7 +266,7 @@ body::after {
 .mission-quote::after { bottom: -1rem; right: -2rem; transform: rotate(180deg); }
 
 .team-photo-wrapper {
-    margin: 3rem auto 0;
+    margin: 3rem auto -6rem;
     max-width: 360px;
     border-radius: 16px;
     overflow: hidden;
@@ -274,6 +275,7 @@ body::after {
     border: 1px solid rgba(201, 169, 110, 0.15);
     background: rgba(255, 255, 255, 0.03);
     padding: 4px;
+    z-index: 10;
 }
 
 .team-photo {
