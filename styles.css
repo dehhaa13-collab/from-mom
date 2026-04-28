@@ -98,6 +98,7 @@ body::after {
     letter-spacing: 0.2em; 
     background: linear-gradient(135deg, #f0d8a8, #c9a96e); 
     -webkit-background-clip: text; 
+    background-clip: text; 
     -webkit-text-fill-color: transparent; 
 }
 .nav-dots { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; max-width: 60%; }
@@ -137,6 +138,7 @@ body::after {
     margin-bottom: 3.5rem; 
     background: linear-gradient(to right, #fff, #c9a96e); 
     -webkit-background-clip: text; 
+    background-clip: text; 
     -webkit-text-fill-color: transparent; 
     letter-spacing: -0.02em;
 }
@@ -204,6 +206,7 @@ body::after {
     font-weight: 400; 
     background: linear-gradient(135deg, #c9a96e, #f0d8a8); 
     -webkit-background-clip: text; 
+    background-clip: text; 
     -webkit-text-fill-color: transparent;
     margin-top: 1rem; 
 }
@@ -261,13 +264,38 @@ body::after {
 .mission-quote::before { top: 1rem; left: -2rem; }
 .mission-quote::after { bottom: -1rem; right: -2rem; transform: rotate(180deg); }
 
+.team-photo-wrapper {
+    margin: 4rem auto 0;
+    max-width: 1000px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 0.5rem;
+}
+
+.team-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.team-photo-wrapper:hover .team-photo {
+    transform: scale(1.02);
+}
+
 /* ===== VALUE ===== */
 .value-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; text-align: center; }
 .value-item { padding: 3rem 2rem; }
 .value-num { 
     font-family: 'Playfair Display', serif; font-size: clamp(4rem, 8vw, 6rem); font-weight: 700; 
     background: linear-gradient(135deg, #fff, #c9a96e); 
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; 
     margin-bottom: 1rem;
     line-height: 1;
 }
